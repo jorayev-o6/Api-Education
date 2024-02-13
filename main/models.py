@@ -96,6 +96,14 @@ class Student(models.Model):
     bio = models.TextField(null=True, blank=True)
     faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE, null=True, blank=True)
     languages = models.ForeignKey(Language, on_delete=models.CASCADE)
+    gender = models.IntegerField(choices=(
+        (1, 'Man'),
+        (2, 'Woman')
+    ), default=1)
+    status = models.IntegerField(choices=(
+        (1, 'accept document'),
+        (2, 'closed document')
+    ))
 
     def __str__(self):
         return self.last_name + ' ' + self.first_name + ' ' + self.middle_name
@@ -113,12 +121,16 @@ class PhoneContact(models.Model):
 
 
 class SubmitUniversity(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    passport = models.FileField(upload_to='RegisPast')
+    certificate = models.FileField(upload_to='Register/Certificate')
+    answer = models.CharField(max_length=255, null=True, blank=True)
     university = models.ForeignKey(University, on_delete=models.CASCADE)
     date = models.DateField()
     status = models.IntegerField(choices=(
         (1, ' '),
         (2, 'accept'),
-        (3, 'accept closed'),
+        (3, 'cancelled'),
     ), default=0)
     info = models.TextField()
 
