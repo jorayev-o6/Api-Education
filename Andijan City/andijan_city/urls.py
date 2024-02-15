@@ -1,5 +1,5 @@
 """
-URL configuration for education project.
+URL configuration for andijan_city project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -23,18 +23,22 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+
+
 schema_view = get_schema_view(
    openapi.Info(
-      title="Education API",
+      title="Andijan City",
       default_version='v1',
-      description="API for Education documentation",
+      description="Andijan City api documentation",
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="jorayevhasanboy2006@gmail.com"),
       license=openapi.License(name="BSD License"),
    ),
    public=True,
-   permission_classes=(permissions.IsAuthenticated,),
+   permission_classes=(permissions.IsAuthenticated,)
 )
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
